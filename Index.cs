@@ -1,11 +1,11 @@
-
-using System; 
+using System;
 
 public readonly struct Index
 {
     readonly int value;
-    readonly bool fromEnd; 
-    public Index(int value, bool fromEnd)
+    readonly bool fromEnd;
+
+    public Index( int value, bool fromEnd )
     {
         this.value = value;
         this.fromEnd = fromEnd;
@@ -16,7 +16,7 @@ public readonly struct Index
         return fromEnd ? length - value : value;
     }
 
-    public int GetIndex(Array array)
+    public int GetIndex( Array array )
     {
         return GetIndex( array.Length );
     }
