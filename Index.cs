@@ -25,4 +25,9 @@ public readonly struct Index
     {
         return GetIndex( readOnlySpan.Length );
     }
+
+    public int GetIndex<T>( Memory<T> memory )
+    {
+        return GetIndex( memory.Length );
+    }
 }
