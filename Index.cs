@@ -11,8 +11,18 @@ public readonly struct Index
         this.fromEnd = fromEnd;
     }
 
+    int GetIndex( int length )
+    {
+        return fromEnd ? length - value : value;
+    }
+
     public int GetIndex(Array array)
     {
-        return fromEnd ? array.Length - value : value;
-    } 
+        return GetIndex( array.Length );
+    }
+
+    public int GetIndex<T>( ReadOnlySpan<T> readOnlySpan )
+    {
+        return GetIndex( readOnlySpan.Length );
+    }
 }
