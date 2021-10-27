@@ -32,13 +32,13 @@ namespace CafeLib.Core.Buffers
         public byte[] ToArray() => Data.ToArray();
         public override string ToString() => Data.ToString();
 
-        // public byte this[Index index]
-        // {
-        //     get => Data.Span[index];
-        //     set => Data.Span[index] = value;
-        // }
-        //
-        // public ByteMemory this[Range range] => Data[range];
+        public byte this[Index index]
+        {
+            get => Data.Span[index.GetIndex( Data )];
+            set => Data.Span[index] = value;
+        }
+        
+        public ByteMemory this[Range range] => Data[range];
 
         public static implicit operator Memory<byte>(ByteMemory rhs) => rhs.Data;
         public static implicit operator ByteMemory(Memory<byte> rhs) => new ByteMemory(rhs);
