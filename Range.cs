@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 public readonly struct Range
 {
@@ -27,4 +28,18 @@ public readonly struct Range
     }
 
     public static Range All => new Range( new Index( 0, false ), new Index( 0, true ) ); 
+    
+    
+
+    public int GetSlice<T>( T[] array )
+    {
+        throw new NotImplementedException();
+    }
+
+    public ReadOnlySpan<T> GetSlice<T>( ReadOnlySpan<T> readOnlySpan )
+    {
+        var length = end.GetIndex( readOnlySpan ) - start.GetIndex( readOnlySpan );
+
+        return readOnlySpan.Slice( start.GetIndex( readOnlySpan ), length );
+    }
 }
