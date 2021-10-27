@@ -1,4 +1,6 @@
 
+using System; 
+
 public readonly struct Index
 {
     readonly int value;
@@ -8,4 +10,9 @@ public readonly struct Index
         this.value = value;
         this.fromEnd = fromEnd;
     }
+
+    public int GetIndex(Array array)
+    {
+        return fromEnd ? array.Length - value : value;
+    } 
 }
