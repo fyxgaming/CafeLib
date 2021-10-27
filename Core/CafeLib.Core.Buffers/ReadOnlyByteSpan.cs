@@ -60,8 +60,8 @@ namespace CafeLib.Core.Buffers
             public byte Current => _enumerator.Current;
         }
 
-        public byte this[Index index] => Data[index];
-        public ReadOnlyByteSpan this[Range range] => Data[range];
+        public byte this[Index index] =>  Data[index.GetIndex( Data )];
+        public ReadOnlyByteSpan this[ Range range ] => range.GetSlice( Data );
 
         public static ReadOnlyByteSpan Empty => default;
 
