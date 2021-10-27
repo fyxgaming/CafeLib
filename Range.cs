@@ -2,18 +2,24 @@ using System;
 
 public readonly struct Range
 {
+    readonly Index start;
+    readonly Index end;
+    
     public Range( Index start, Index end )
     {
-        throw new NotImplementedException();
+        this.start = start;
+        this.end = end;
     }
 
     public static Range StartAt( Index start )
     {
-        throw new NotImplementedException(); }
+        return new Range( start, new Index( 0, true ) );
+    } 
 
     public static Range EndAt( Index end )
     {
-        throw new NotImplementedException();
+        return new Range( new Index( 0, false ), end ); 
     }
-    public static Range All { get; }
+
+    public static Range All => new Range( new Index( 0, false ), new Index( 0, true ) ); 
 }
