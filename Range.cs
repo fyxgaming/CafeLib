@@ -38,7 +38,7 @@ public readonly struct Range
 
     public ReadOnlySpan<T> GetSlice<T>( ReadOnlySpan<T> readOnlySpan )
     {
-        var length = end.GetIndex( readOnlySpan ) - start.GetIndex( readOnlySpan );
+        var length = end.GetIndex( readOnlySpan ) - start.GetIndex( readOnlySpan ) - 1;
 
         return readOnlySpan.Slice( start.GetIndex( readOnlySpan ), length );
     }
