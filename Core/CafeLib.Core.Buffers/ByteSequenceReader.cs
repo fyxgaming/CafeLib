@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Buffers;
+using Fyx.Buffers;
 
 namespace CafeLib.Core.Buffers
 {
     public ref struct ByteSequenceReader
     {
-        public SequenceReader<byte> Data;
+        public CorefxSequenceReader<byte> Data;
 
         public ByteSequenceReader(byte[] bytes)
         {
-            Data = new SequenceReader<byte>(new ReadOnlyByteSequence(bytes ?? Array.Empty<byte>()));
+            Data = new CorefxSequenceReader<byte>(new ReadOnlyByteSequence(bytes ?? Array.Empty<byte>()));
         }
 
-        public ByteSequenceReader(SequenceReader<byte> sequence)
+        public ByteSequenceReader(CorefxSequenceReader<byte> sequence)
         {
             Data = sequence;
         }
 
         public ByteSequenceReader(ReadOnlyByteSequence sequence)
         {
-            Data = new SequenceReader<byte>(sequence);
+            Data = new CorefxSequenceReader<byte>(sequence);
         }
 
         public long Consumed => Data.Consumed;
@@ -66,8 +67,8 @@ namespace CafeLib.Core.Buffers
 
         public bool TryPeek(out byte value) => Data.TryPeek(out value);
 
-        public static implicit operator SequenceReader<byte>(ByteSequenceReader rhs) => rhs.Data;
-        public static implicit operator ByteSequenceReader(SequenceReader<byte> rhs) => new ByteSequenceReader(rhs);
+        public static implicit operator CorefxSequenceReader<byte>(ByteSequenceReader rhs) => rhs.Data;
+        public static implicit operator ByteSequenceReader(CorefxSequenceReader<byte> rhs) => new ByteSequenceReader(rhs);
 
         /// <summary>
         /// Reads an <see cref="byte"/>.
