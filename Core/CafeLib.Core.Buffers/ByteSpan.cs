@@ -20,11 +20,11 @@ namespace CafeLib.Core.Buffers
 
         public byte this[Index index]
         {
-            get => Data[index];
-            set => Data[index] = value;
+            get => Data[index.GetIndex( Data )];
+            set => Data[index.GetIndex( Data )] = value;
         }
 
-        public ByteSpan this[Range range] => Data[range];
+        public ByteSpan this[ Range range ] => range.GetSlice( Data );
 
         public ByteSpan Reverse()
         {
@@ -35,7 +35,7 @@ namespace CafeLib.Core.Buffers
         public bool IsEmpty => Data.IsEmpty;
         public int Length => Data.Length;
 
-        public ByteSpan Slice(int start) => Data[start..];
+        public ByteSpan Slice( int start ) => Range.StartAt( new Index( start, false ) ).GetSlice( Data );
         public ByteSpan Slice(int start, int length) => Data.Slice(start, length);
 
         public byte[] ToArray() => Data.ToArray();

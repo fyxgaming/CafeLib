@@ -62,13 +62,14 @@ namespace CafeLib.Core.Buffers.Arrays
         /// Buffer indexer.
         /// </summary>
         /// <param name="index"></param>
-        public T this[Index index] => Span[index];
+        public T this[Index index] => Span[index.GetIndex( Span )];
 
+        public T this[ int index ] => Span[index]; 
         /// <summary>
         /// Buffer slice.
         /// </summary>
         /// <param name="range"></param>
-        public ReadOnlySpan<T> this[Range range] => Span[range];
+        public ReadOnlySpan<T> this[ Range range ] => range.GetSlice( Span );
         
         /// <summary>
         /// Enumerates the ByteArrayBuffer;
