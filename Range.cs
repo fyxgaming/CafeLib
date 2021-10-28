@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using CafeLib.Core.Buffers;
 
 public readonly struct Range
 {
@@ -42,4 +43,12 @@ public readonly struct Range
 
         return readOnlySpan.Slice( start.GetIndex( readOnlySpan ), length );
     }
+    
+    public ByteMemory GetSlice( ByteMemory byteMemory )
+    {
+        var length = end.GetIndex( byteMemory ) - start.GetIndex( byteMemory ) - 1;
+
+        return byteMemory.Slice( start.GetIndex( byteMemory ), length );
+    }
+
 }
