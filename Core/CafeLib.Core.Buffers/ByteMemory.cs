@@ -35,10 +35,10 @@ namespace CafeLib.Core.Buffers
         public byte this[Index index]
         {
             get => Data.Span[index.GetIndex( Data )];
-            set => Data.Span[index] = value;
+            set => Data.Span[index.GetIndex( Data )] = value;
         }
-        
-        public ByteMemory this[Range range] => Data[range];
+
+        public ByteMemory this[ Range range ] => range.GetSlice( Data ); 
 
         public static implicit operator Memory<byte>(ByteMemory rhs) => rhs.Data;
         public static implicit operator ByteMemory(Memory<byte> rhs) => new ByteMemory(rhs);
