@@ -11,6 +11,7 @@ using CafeLib.BsvSharp.Numerics;
 using CafeLib.BsvSharp.Persistence;
 using CafeLib.BsvSharp.Signatures;
 using CafeLib.Core.Buffers;
+using Fyx.IO;
 using Newtonsoft.Json;
 
 namespace CafeLib.BsvSharp.Scripting
@@ -39,7 +40,7 @@ namespace CafeLib.BsvSharp.Scripting
             : this(Encoders.Hex.Decode(hex))
         {
         }
-
+         
         /// <summary>
         /// Serialize Script to data writer
         /// </summary>
@@ -74,7 +75,7 @@ namespace CafeLib.BsvSharp.Scripting
         }
         
 
-        public void Read(BinaryReader s)
+        public void Read(CorefxBinaryReader s)
         {
             var count = s.ReadInt32();
             if (count == -1)
@@ -84,7 +85,7 @@ namespace CafeLib.BsvSharp.Scripting
             else
             {
                 var bytes = new byte[count];
-                s.Read(bytes);
+                s.Read( bytes);
                 Data = new VarType(bytes);
             }
         }
