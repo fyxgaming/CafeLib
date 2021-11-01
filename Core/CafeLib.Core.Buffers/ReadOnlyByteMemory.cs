@@ -37,12 +37,12 @@ namespace CafeLib.Core.Buffers
 
         public byte this[int index] => Data.Span[index];
 
-        public ReadOnlyByteSpan this[Range range] => Data.Span[range];
+        public ReadOnlyByteSpan this[ Range range ] => range.GetSlice( Data.Span );
 
         public bool IsEmpty => Data.IsEmpty;
         public int Length => Data.Length;
 
-        public ReadOnlyByteSpan Slice(int start) => Data.Span[start..];
+        public ReadOnlyByteSpan Slice( int start ) => Range.StartAt( new Index( start, false ) ).GetSlice( Data.Span );
         public ReadOnlyByteSpan Slice(int start, int length) => Data.Span.Slice(start, length);
 
         public void CopyTo(ByteMemory destination) => Data.CopyTo(destination);

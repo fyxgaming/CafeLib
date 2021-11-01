@@ -9,8 +9,13 @@ public readonly struct Index
     {
         this.value = value;
         this.fromEnd = fromEnd;
-    } 
+    }
 
+    public static Index FromEnd( int value )
+    {
+        return new Index( value, true );
+    }
+    
     int GetIndex( int length )
     {
         return fromEnd ? length - value : value;

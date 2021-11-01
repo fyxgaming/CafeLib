@@ -71,8 +71,8 @@ namespace CafeLib.BsvSharp.Crypto
             var point = pubParams.Q.Multiply(privParams.D).Normalize();
             var x = (ByteSpan)point.X.ToBigInteger().ToByteArrayUnsigned();
             var h = Hashes.Sha512(x).Span;
-            _kE = new UInt256(h[..32]);
-            _kM = new UInt256(h[32..]);
+            _kE = new UInt256( Range.EndAt( 32 ).GetSlice( h ) );
+            _kM = new UInt256( Range.StartAt( 32 ).GetSlice( h ) ); 
         }
 
         public byte[] Encrypt(string message) => Encrypt(message.Utf8ToBytes());
