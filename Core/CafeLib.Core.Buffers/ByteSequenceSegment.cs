@@ -38,7 +38,7 @@ namespace CafeLib.Core.Buffers
             return segment;
         }
 
-        public ReadOnlyByteSequence ToSequence()
+        public CorefxReadOnlyByteSequence ToSequence()
         {
             var last = this;
             while (Next != null) 

@@ -10,7 +10,7 @@ namespace CafeLib.Core.Buffers
 
         public ByteSequenceReader(byte[] bytes)
         {
-            Data = new CorefxSequenceReader<byte>(new ReadOnlyByteSequence(bytes ?? Array.Empty<byte>()));
+            Data = new CorefxSequenceReader<byte>(new CorefxReadOnlyByteSequence(bytes ?? Array.Empty<byte>()));
         }
 
         public ByteSequenceReader(CorefxSequenceReader<byte> sequence)
@@ -18,7 +18,7 @@ namespace CafeLib.Core.Buffers
             Data = sequence;
         }
 
-        public ByteSequenceReader(ReadOnlyByteSequence sequence)
+        public ByteSequenceReader(CorefxReadOnlyByteSequence sequence)
         {
             Data = new CorefxSequenceReader<byte>(sequence);
         }
@@ -37,7 +37,7 @@ namespace CafeLib.Core.Buffers
 
         public long Remaining => Data.Remaining;
 
-        public ReadOnlyByteSequence Sequence => Data.Sequence;
+        public CorefxReadOnlyByteSequence Sequence => Data.Sequence;
 
         public ReadOnlyByteSpan UnreadSpan => Data.UnreadSpan;
 

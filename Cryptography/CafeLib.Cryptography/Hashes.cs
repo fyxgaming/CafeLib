@@ -36,7 +36,7 @@ namespace CafeLib.Cryptography
             return hash;
         }
 
-        public static UInt256 Sha256(this ReadOnlyByteSequence data)
+        public static UInt256 Sha256(this CorefxReadOnlyByteSequence data)
         {
             var hash = new UInt256();
             new Sha256().ComputeHash(data.ToSpan()).CopyTo(hash.Span);

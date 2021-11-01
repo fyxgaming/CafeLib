@@ -17,7 +17,7 @@ namespace CafeLib.Core.Buffers
             Data = data;
         }
 
-        public ReadOnlyByteSpan(ReadOnlyByteSequence data)
+        public ReadOnlyByteSpan(CorefxReadOnlyByteSequence data)
         {
             Data = data.ToSpan();
         }
@@ -60,6 +60,7 @@ namespace CafeLib.Core.Buffers
             public byte Current => _enumerator.Current;
         }
 
+        public byte this[ int index ] => Data[index];
         public byte this[Index index] =>  Data[index.GetIndex( Data )];
         public ReadOnlyByteSpan this[ Range range ] => range.GetSlice( Data );
 

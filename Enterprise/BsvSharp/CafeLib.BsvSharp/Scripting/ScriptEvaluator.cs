@@ -38,7 +38,7 @@ namespace CafeLib.BsvSharp.Scripting
         /// <returns></returns>
         public bool EvalScript(Script script, ScriptFlags flags, ISignatureChecker checker, out ScriptError error)
         {
-            var ros = new ReadOnlyByteSequence(script.Data);
+            var ros = new CorefxReadOnlyByteSequence(script.Data);
             // ReSharper disable once UnusedVariable
             var pc = ros.Start;
             var pend = ros.End;

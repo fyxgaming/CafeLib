@@ -208,15 +208,15 @@ namespace CafeLib.BsvSharp.Scripting
             }
         */
 
-        public static (bool ok, Operand op) TryRead(ref ReadOnlyByteSequence ros, out long consumed) {
+        public static (bool ok, Operand op) TryRead(ref CorefxReadOnlyByteSequence ros, out long consumed) {
             var op = new Operand();
             var ok = op.TryReadOperand(ref ros, out consumed);
             return (ok, op);
         }
 
-        public bool TryReadOperand(ref ReadOnlyByteSequence ros) => TryReadOperand(ref ros, out _);
+        public bool TryReadOperand(ref CorefxReadOnlyByteSequence ros) => TryReadOperand(ref ros, out _);
 
-        public bool TryReadOperand(ref ReadOnlyByteSequence ros, out long consumed)
+        public bool TryReadOperand(ref CorefxReadOnlyByteSequence ros, out long consumed)
         {
             consumed = 0L;
             var r = new ByteSequenceReader(ros);

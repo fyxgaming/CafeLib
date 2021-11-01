@@ -4,18 +4,18 @@ using System.Runtime.CompilerServices;
 
 namespace CafeLib.Core.Buffers
 {
-    public readonly struct ReadOnlyByteSequence
+    public readonly struct CorefxReadOnlyByteSequence
     {
-        public static readonly ReadOnlyByteSequence Empty = new ReadOnlyByteSequence(Array.Empty<byte>());
+        public static readonly CorefxReadOnlyByteSequence Empty = new CorefxReadOnlyByteSequence(Array.Empty<byte>());
 
         public ReadOnlySequence<byte> Data { get; }
 
-        public ReadOnlyByteSequence(byte[] data)
+        public CorefxReadOnlyByteSequence(byte[] data)
         {
             Data = new ReadOnlySequence<byte>(data ?? Array.Empty<byte>());
         }
 
-        public ReadOnlyByteSequence(ReadOnlySequence<byte> data)
+        public CorefxReadOnlyByteSequence(ReadOnlySequence<byte> data)
         {
             Data = data;
         }
@@ -31,14 +31,14 @@ namespace CafeLib.Core.Buffers
 
         public ReadOnlyByteSpan ToSpan() => Data.IsSingleSegment ? Data.FirstSpan : Data.ToArray();
 
-        public ReadOnlyByteSequence Slice(SequencePosition start, SequencePosition end) => Data.Slice(start, end);
-        public ReadOnlyByteSequence Slice(SequencePosition start, int length) => Data.Slice(start, length);
-        public ReadOnlyByteSequence Slice(SequencePosition start, long length) => Data.Slice(start, length);
-        public ReadOnlyByteSequence Slice(int start, SequencePosition end) => Data.Slice(start, end);
-        public ReadOnlyByteSequence Slice(int start , int length) => Data.Slice(start, length);
-        public ReadOnlyByteSequence Slice(long start, int length) => Data.Slice(start, length);
-        public ReadOnlyByteSequence Slice(int start) => Data.Slice(start);
-        public ReadOnlyByteSequence Slice(long start) => Data.Slice(start);
+        public CorefxReadOnlyByteSequence Slice(SequencePosition start, SequencePosition end) => Data.Slice(start, end);
+        public CorefxReadOnlyByteSequence Slice(SequencePosition start, int length) => Data.Slice(start, length);
+        public CorefxReadOnlyByteSequence Slice(SequencePosition start, long length) => Data.Slice(start, length);
+        public CorefxReadOnlyByteSequence Slice(int start, SequencePosition end) => Data.Slice(start, end);
+        public CorefxReadOnlyByteSequence Slice(int start , int length) => Data.Slice(start, length);
+        public CorefxReadOnlyByteSequence Slice(long start, int length) => Data.Slice(start, length);
+        public CorefxReadOnlyByteSequence Slice(int start) => Data.Slice(start);
+        public CorefxReadOnlyByteSequence Slice(long start) => Data.Slice(start);
         public ByteSpan CopyTo(ByteSpan destination)
         {
             Data.CopyTo(destination);
@@ -54,7 +54,7 @@ namespace CafeLib.Core.Buffers
             /// <summary>Initialize the enumerator.</summary>
             /// <param name="span">The span to enumerate.</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            internal Enumerator(ReadOnlyByteSequence span)
+            internal Enumerator(CorefxReadOnlyByteSequence span)
             {
                 _enumerator = span.Data.GetEnumerator();
             }
@@ -67,22 +67,22 @@ namespace CafeLib.Core.Buffers
             public ReadOnlyByteMemory Current => _enumerator.Current;
         }
 
-        public static implicit operator ReadOnlySequence<byte>(ReadOnlyByteSequence rhs) => rhs.Data;
-        public static implicit operator ReadOnlyByteSequence(ReadOnlySequence<byte> rhs) => new ReadOnlyByteSequence(rhs);
+        public static implicit operator ReadOnlySequence<byte>(CorefxReadOnlyByteSequence rhs) => rhs.Data;
+        public static implicit operator CorefxReadOnlyByteSequence(ReadOnlySequence<byte> rhs) => new CorefxReadOnlyByteSequence(rhs);
 
-        public static explicit operator byte[](ReadOnlyByteSequence rhs) => rhs.ToArray();
-        public static implicit operator ReadOnlyByteSequence(byte[] rhs) => new ReadOnlyByteSequence(rhs);
+        public static explicit operator byte[](CorefxReadOnlyByteSequence rhs) => rhs.ToArray();
+        public static implicit operator CorefxReadOnlyByteSequence(byte[] rhs) => new CorefxReadOnlyByteSequence(rhs);
 
-        public static implicit operator ReadOnlyByteSpan(ReadOnlyByteSequence rhs) => rhs.ToSpan();
-        public static explicit operator ReadOnlyByteSequence(ReadOnlyByteSpan rhs) => new ReadOnlyByteSequence(rhs);
+        public static implicit operator ReadOnlyByteSpan(CorefxReadOnlyByteSequence rhs) => rhs.ToSpan();
+        public static explicit operator CorefxReadOnlyByteSequence(ReadOnlyByteSpan rhs) => new CorefxReadOnlyByteSequence(rhs);
 
         public override int GetHashCode() => Data.GetHashCode();
 
-        public override bool Equals(object obj) => obj is ReadOnlyByteSequence type && this == type;
-        public bool Equals(ReadOnlyByteSequence rhs) => ((ReadOnlyByteSpan)this).Data.SequenceEqual((ReadOnlyByteSpan)rhs);
+        public override bool Equals(object obj) => obj is CorefxReadOnlyByteSequence type && this == type;
+        public bool Equals(CorefxReadOnlyByteSequence rhs) => ((ReadOnlyByteSpan)this).Data.SequenceEqual((ReadOnlyByteSpan)rhs);
 
-        public static bool operator ==(ReadOnlyByteSequence x, ReadOnlyByteSequence y) => x.Equals(y);
-        public static bool operator !=(ReadOnlyByteSequence x, ReadOnlyByteSequence y) => !(x == y);
+        public static bool operator ==(CorefxReadOnlyByteSequence x, CorefxReadOnlyByteSequence y) => x.Equals(y);
+        public static bool operator !=(CorefxReadOnlyByteSequence x, CorefxReadOnlyByteSequence y) => !(x == y);
 
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace CafeLib.Core.Buffers
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public int CompareTo(ReadOnlyByteSequence other)
+        public int CompareTo(CorefxReadOnlyByteSequence other)
         {
             var ae = GetEnumerator();
             var be = other.GetEnumerator();
@@ -125,7 +125,7 @@ namespace CafeLib.Core.Buffers
         /// </summary>
         /// <param name="other"></param>
         /// <returns></returns>
-        public bool StartsWith(ReadOnlyByteSequence other)
+        public bool StartsWith(CorefxReadOnlyByteSequence other)
         {
             var s = Data;
             var o = other;
@@ -145,7 +145,7 @@ namespace CafeLib.Core.Buffers
             }
             return true;
         }
-        public ReadOnlyByteSequence RemoveSlice(long start, long end)
+        public CorefxReadOnlyByteSequence RemoveSlice(long start, long end)
             => RemoveSlice(Data.GetPosition(start), Data.GetPosition(end));
 
 

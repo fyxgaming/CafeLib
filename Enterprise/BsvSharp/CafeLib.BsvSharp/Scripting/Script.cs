@@ -107,7 +107,7 @@ namespace CafeLib.BsvSharp.Scripting
 
         public bool IsPushOnly()
         {
-            var ros = new ReadOnlyByteSequence(Data);
+            var ros = new CorefxReadOnlyByteSequence(Data);
             var op = new Operand();
 
             while (ros.Length > 0)
@@ -128,7 +128,7 @@ namespace CafeLib.BsvSharp.Scripting
         {
             var bytes = rawScriptHex.HexToBytes();
             var s = new Script();
-            var ros = new ReadOnlyByteSequence(bytes);
+            var ros = new CorefxReadOnlyByteSequence(bytes);
             var sr = new ByteSequenceReader(ros);
             return (s.TryReadScript(ref sr, withoutLength), s);
         }
@@ -136,7 +136,7 @@ namespace CafeLib.BsvSharp.Scripting
         public int FindAndDelete(VarType vchSig)
         {
             var nFound = 0;
-            var s = new ReadOnlyByteSequence(Data);
+            var s = new CorefxReadOnlyByteSequence(Data);
             var r = s;
             if (vchSig.Length == 0) return nFound;
 
@@ -144,7 +144,7 @@ namespace CafeLib.BsvSharp.Scripting
             var consumed = 0L;
             var offset = 0L;
 
-            var o = new ReadOnlyByteSequence(vchSig);
+            var o = new CorefxReadOnlyByteSequence(vchSig);
             var oLen = o.Length;
 
             do 
@@ -189,7 +189,7 @@ namespace CafeLib.BsvSharp.Scripting
         /// <returns></returns>
         public readonly IEnumerable<Operand> Decode()
         {
-            var ros = new ReadOnlyByteSequence(Data);
+            var ros = new CorefxReadOnlyByteSequence(Data);
 
             while (ros.Length > 0)
             {
@@ -212,7 +212,7 @@ namespace CafeLib.BsvSharp.Scripting
             if (!withoutLength && !r.TryReadVariant(out length)) return false;
             if (r.Data.Remaining < length) return false;
 
-            Data = new VarType((ReadOnlyByteSequence)r.Data.Sequence.Slice(r.Data.Position, length));
+            Data = new VarType((CorefxReadOnlyByteSequence)r.Data.Sequence.Slice(r.Data.Position, length));
             r.Data.Advance(length);
             return true;
         }
@@ -278,7 +278,7 @@ namespace CafeLib.BsvSharp.Scripting
         /// <param name="scriptLen">How long the entire script is, or zero.</param>
         /// <param name="limitLen">How many bytes to process, or zero.</param>
         /// <returns></returns>
-        public static string ToTemplateString(ReadOnlyByteSequence script, long scriptLen = 0, long limitLen = 0) 
+        public static string ToTemplateString(CorefxReadOnlyByteSequence script, long scriptLen = 0, long limitLen = 0) 
         {
             var ros = script;
             if (limitLen == 0) limitLen = long.MaxValue;
@@ -481,7 +481,7 @@ namespace CafeLib.BsvSharp.Scripting
 
         public static (bool ok, SignatureHashEnum sh, byte[] r, byte[] s, PublicKey pk) IsCheckSigScript(byte[] scriptSigBytes) => IsCheckSigScript(new ReadOnlySequence<byte>(scriptSigBytes));
             
-        public static (bool ok, SignatureHashEnum sh, byte[] r, byte[] s, PublicKey pk) IsCheckSigScript(ReadOnlyByteSequence scriptSigBytes) {
+        public static (bool ok, SignatureHashEnum sh, byte[] r, byte[] s, PublicKey pk) IsCheckSigScript(CorefxReadOnlyByteSequence scriptSigBytes) {
             var ros = scriptSigBytes;
             var (ok1, op1) = Operand.TryRead(ref ros, out var consumed1);
             var (ok2, op2) = Operand.TryRead(ref ros, out var consumed2);

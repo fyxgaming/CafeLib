@@ -53,7 +53,7 @@ namespace CafeLib.BsvSharp.Chain
         //    return true;
         //}
 
-        public bool TryReadBlock(ref ReadOnlyByteSequence ros)
+        public bool TryReadBlock(ref CorefxReadOnlyByteSequence ros)
         {
             var r = new ByteSequenceReader(ros);
             if (!TryReadBlock(ref r)) return false;

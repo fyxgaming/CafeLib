@@ -37,7 +37,7 @@ namespace CafeLib.BsvSharp.Persistence
             return this;
         }
 
-        public IDataWriter Write(ReadOnlyByteSequence data)
+        public IDataWriter Write(CorefxReadOnlyByteSequence data)
         {
             _sha256.BlockUpdate(data.ToArray(), 0, (int)data.Length);
             return this;

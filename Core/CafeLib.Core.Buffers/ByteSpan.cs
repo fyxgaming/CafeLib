@@ -82,7 +82,7 @@ namespace CafeLib.Core.Buffers
         public static implicit operator ByteSpan(ReadOnlyByteSpan rhs) => new ByteSpan(rhs.ToArray());
         public static implicit operator ReadOnlyByteSpan(ByteSpan rhs) => rhs.Data;
 
-        public static implicit operator ByteSpan(ReadOnlyByteSequence rhs) => new ByteSpan(rhs.Data.ToArray());
-        public static implicit operator ReadOnlyByteSequence(ByteSpan rhs) => new ReadOnlyByteSequence(rhs);
+        public static implicit operator ByteSpan(CorefxReadOnlyByteSequence rhs) => new ByteSpan(rhs.Data.ToArray());
+        public static implicit operator CorefxReadOnlyByteSequence(ByteSpan rhs) => new CorefxReadOnlyByteSequence(rhs);
     }
 }

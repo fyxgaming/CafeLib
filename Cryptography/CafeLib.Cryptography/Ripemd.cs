@@ -36,7 +36,7 @@ namespace CafeLib.Cryptography
             bytes.CopyTo(hash);
         }
 
-        public static void Ripemd160(ReadOnlyByteSequence data, ByteSpan hash)
+        public static void Ripemd160(CorefxReadOnlyByteSequence data, ByteSpan hash)
         {
             var d = new RipeMD160Digest();
             foreach (var m in data) {

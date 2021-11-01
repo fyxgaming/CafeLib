@@ -243,7 +243,7 @@ namespace CafeLib.BsvSharp.Passphrase
 		/// </summary>
 		/// <param name="entropy"></param>
 		/// <returns></returns>
-		private static string GetChecksum(ReadOnlyByteSequence entropy)
+		private static string GetChecksum(CorefxReadOnlyByteSequence entropy)
 		{
 			var hash = entropy.Sha256();
 			var bits = (int)entropy.Length * 8;
