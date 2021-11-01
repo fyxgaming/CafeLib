@@ -5,11 +5,11 @@ public readonly struct Index
     readonly int value;
     readonly bool fromEnd;
 
-    public Index( int value, bool fromEnd )
+    public Index( int value, bool fromEnd = false)
     {
         this.value = value;
         this.fromEnd = fromEnd;
-    }
+    } 
 
     int GetIndex( int length )
     {

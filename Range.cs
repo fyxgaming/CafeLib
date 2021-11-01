@@ -21,11 +21,20 @@ public readonly struct Range
     public static Range StartAt( Index start )
     {
         return new Range( start, new Index( 0, true ) );
-    } 
+    }
+
+    public static Range StartAt( int start )
+    {
+        return StartAt( new Index( start ) );
+    }
 
     public static Range EndAt( Index end )
     {
         return new Range( new Index( 0, false ), end ); 
+    }
+    public static Range EndAt( int end )
+    {
+        return EndAt( new Index( end ) ); 
     }
 
     public static Range All => new Range( new Index( 0, false ), new Index( 0, true ) ); 
@@ -45,6 +54,13 @@ public readonly struct Range
     }
     
     public ByteMemory GetSlice( ByteMemory byteMemory )
+    {
+        var length = end.GetIndex( byteMemory ) - start.GetIndex( byteMemory ) - 1;
+
+        return byteMemory.Slice( start.GetIndex( byteMemory ), length );
+    }
+    
+    public ByteSpan GetSlice( ByteSpan byteMemory )
     {
         var length = end.GetIndex( byteMemory ) - start.GetIndex( byteMemory ) - 1;
 
