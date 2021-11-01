@@ -35,4 +35,9 @@ public readonly struct Index
     {
         return GetIndex( span.Length );
     }
+    
+    public int GetIndex( string str )
+    {
+        return GetIndex( str.Length );
+    }
 }

@@ -51,12 +51,19 @@ public readonly struct Range
         return byteMemory.Slice( start.GetIndex( byteMemory ), length );
     }
     
+    public string GetSlice( string str )
+    {
+        var length = end.GetIndex( str ) - start.GetIndex( str ) - 1;
+
+        return str.Substring( start.GetIndex( str ), length );
+    }
+    
     public ByteMemory GetSlice<T>( Span<T> span )
     {
         // var length = end.GetIndex( span ) - start.GetIndex( span ) - 1;
         //
         // return span.Slice( start.GetIndex( span ), length );
         throw new NotImplementedException();
-    }
+    } 
 
 }

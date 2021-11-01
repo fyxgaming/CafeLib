@@ -241,7 +241,7 @@ namespace CafeLib.BsvSharp.Keys
         private static uint ParseIndex(string pathIndex)
         {
             var hardened = pathIndex.Length > 0 && pathIndex[^1] == '\'' || pathIndex[^1] == 'H';
-            var index = uint.Parse(hardened ? pathIndex[..^1] : pathIndex);
+            var index = uint.Parse( hardened ? Range.EndAt( new Index( 1, true ) ).GetSlice( pathIndex ) : pathIndex); // pathIndex[ ..^1] : pathIndex);
             if (index >= HardenedBit) throw new ArgumentException($"Indices must be less than {HardenedBit}.");
             return hardened ? index | HardenedBit : index;
         }
